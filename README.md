@@ -8,3 +8,20 @@ tensorboard --logdir=tflearn_logs
 #(You can navigate to http://0.0.0.0:6006)
 ```
 
+# preprocessing your own dataset
+ to use your own dataset you have to make it form like this
+```
+aclImdb/
+    ├── test
+    │   ├── neg
+    │   └── pos
+    └── train
+    │   ├── neg
+    │   ├── pos
+    └── unsup
+```
+and use
+```
+cd  preprocessor
+python imdb_preprocess.py
+```
