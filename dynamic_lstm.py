@@ -22,7 +22,7 @@ import tflearn
 from tflearn.data_utils import to_categorical, pad_sequences
 from tflearn.datasets import imdb
 
-dataset_path  = 'tflearn_original_imdb.pkl'
+dataset_path  = 'imdb_doc2wec_sentiment.pkl'
 print("running Dynamic_lstm_on_", dataset_path)
 # IMDB Dataset loading
 train, test, _ = imdb.load_data(path=dataset_path, n_words=10000,

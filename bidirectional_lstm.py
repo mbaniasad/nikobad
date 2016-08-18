@@ -27,7 +27,7 @@ from tflearn.layers.embedding_ops import embedding
 from tflearn.layers.recurrent import bidirectional_rnn, BasicLSTMCell
 from tflearn.layers.estimator import regression
 
-dataset_path  = 'tflearn_original_imdb.pkl'
+dataset_path  = 'imdb_doc2wec_sentiment.pkl'
 
 print("running bidirectional_lstm_on_", dataset_path)
 
