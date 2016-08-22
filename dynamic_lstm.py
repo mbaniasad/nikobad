@@ -16,16 +16,30 @@ Links:
     - http://ai.stanford.edu/~amaas/data/sentiment/
 
 """
+
 from __future__ import division, print_function, absolute_import
 
 import tflearn
 from tflearn.data_utils import to_categorical, pad_sequences
 from tflearn.datasets import imdb
 
-dataset_path  = 'imdb_doc2wec_sentiment.pkl'
-print("running Dynamic_lstm_on_", dataset_path)
+
+class config:
+    
+    def __init__(self,dataset_path,number_of_words_used_in_embedding,dropout):
+        self.dataset_path = dataset_path
+        self.number_of_words_used_in_embedding  = number_of_words_used_in_embedding
+        self.dropout = dropout
+    def setting_name(self):
+        return 'dynamicLSTM'+'ds-'+self.dataset_path +'embedding-'+str(self.number_of_words_used_in_embedding)+'dropout-'+str(self.dropout)
+
+
+cl = config( 'imdb_doc2wec_sentiment.pkl', 10000, 0.1)
+
+
+print("running Dynamic_lstm_on_", cl.dataset_path)
 # IMDB Dataset loading
-train, test, _ = imdb.load_data(path=dataset_path, n_words=10000,
+train, test, _ = imdb.load_data(path=cl.dataset_path, n_words=cl.number_of_words_used_in_embedding,
                                 valid_portion=0.1)
 trainX, trainY = train
 testX, testY = test
@@ -46,13 +60,13 @@ testY = to_categorical(testY, nb_classes=2)
 net = tflearn.input_data([None, 100])
 # Masking is not required for embedding, sequence length is computed prior to
 # the embedding op and assigned as 'seq_length' attribute to the returned Tensor.
-net = tflearn.embedding(net, input_dim=10000, output_dim=128)
-net = tflearn.lstm(net, 128, dropout=0.8, dynamic=True)
+net = tflearn.embedding(net, input_dim=cl.number_of_words_used_in_embedding, output_dim=128)
+net = tflearn.lstm(net, 128, dropout=cl.dropout, dynamic=True)
 net = tflearn.fully_connected(net, 2, activation='softmax')
 net = tflearn.regression(net, optimizer='adam', learning_rate=0.001,
                          loss='categorical_crossentropy')
 
 # Training
-model = tflearn.DNN(net, tensorboard_verbose=0, tensorboard_dir='./tflearn_logs/')
+model = tflearn.DNN(net, tensorboard_verbose=0, tensorboard_dir='./tflearn_logs/'+cl.setting_name())
 model.fit(trainX, trainY, validation_set=(testX, testY), show_metric=True,
           batch_size=32, n_epoch=10)

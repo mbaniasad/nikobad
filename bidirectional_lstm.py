@@ -47,7 +47,7 @@ testY = to_categorical(testY, nb_classes=2)
 
 # Network building
 net = input_data(shape=[None, 200])
-net = embedding(net, input_dim=20000, output_dim=128)
+net = embedding(net, input_dim=73737, output_dim=128)
 net = bidirectional_rnn(net, BasicLSTMCell(128), BasicLSTMCell(128))
 net = dropout(net, 0.5)
 net = fully_connected(net, 2, activation='softmax')
