@@ -25,7 +25,7 @@ class config:
         self.optimizer=optimizer
         
     def setting_name(self):
-        return 'lstm'+'ds-'+self.dataset_path +'optimizer-'+self.optimizer+'loss-'+str(self.loss)
+        return 'doc2vec'+'ds-'+self.dataset_path +'optimizer-'+self.optimizer+'loss-'+str(self.loss)
 
 
 doc2vec_configs = [
