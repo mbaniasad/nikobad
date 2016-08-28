@@ -28,5 +28,8 @@ python imdb_preprocess.py
 
 
 # pkl ed datasets
-aclImdb which is accessable with preprocessor code
-doc2vec_sentiment datasets from [doc2vec sentiment repo](https://github.com/linanqiu/word2vec-sentiments) **have to change the format of raw charachter data if want to use preprocessor on this**
+1- aclImdb which is accessable with preprocessor code
+
+2- doc2vec_sentiment datasets from [doc2vec sentiment repo](https://github.com/linanqiu/word2vec-sentiments) **have to change the format of raw charachter data if want to use preprocessor on this**
+
+3- amazon reviews dataset from (...) **German**
